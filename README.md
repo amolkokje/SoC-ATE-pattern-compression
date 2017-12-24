@@ -13,15 +13,15 @@ Besides that, the other advantage is that when we modify the pattern to enable c
 #### PATTERN AFTER CHANNEL LINK:
 > NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
 > JSC           { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-NOP         { V { all_pins = 0110LHLHL1 ; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 1010LLHHL1 ; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 0101HLLHH0; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 1001HLHLH0; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 0110LHHLH1; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 1010LHLLL1 ; } W { all_pins = scan_shift; } }
-EXITSC     { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-EXIT         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+> NOP         { V { all_pins = 0110LHLHL1 ; } W { all_pins = scan_shift; } }
+> NOP         { V { all_pins = 1010LLHHL1 ; } W { all_pins = scan_shift; } }
+> NOP         { V { all_pins = 0101HLLHH0; } W { all_pins = scan_shift; } }
+> NOP         { V { all_pins = 1001HLHLH0; } W { all_pins = scan_shift; } }
+> NOP         { V { all_pins = 0110LHHLH1; } W { all_pins = scan_shift; } }
+> NOP         { V { all_pins = 1010LHLLL1 ; } W { all_pins = scan_shift; } }
+> EXITSC     { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+> NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+> EXIT         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
 
 ## 2 - Replace Contiguous Vectors with Repeats
 Developed modules to modify the pattern.
