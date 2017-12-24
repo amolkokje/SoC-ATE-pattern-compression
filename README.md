@@ -11,8 +11,8 @@ This enables the tester to use memory from the other unused channels to link to 
 Besides that, the other advantage is that when we modify the pattern to enable channel link, it reduces the pattern size too. 
 
 #### PATTERN AFTER CHANNEL LINK:
-NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-JSC           { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+> NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+> JSC           { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
 NOP         { V { all_pins = 0110LHLHL1 ; } W { all_pins = scan_shift; } }
 NOP         { V { all_pins = 1010LLHHL1 ; } W { all_pins = scan_shift; } }
 NOP         { V { all_pins = 0101HLLHH0; } W { all_pins = scan_shift; } }
