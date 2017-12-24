@@ -1,4 +1,4 @@
-# SoC-ATE-pattern-compression
+# ATE Pattern Compression Techniques - Theory and Automation
 This project has scripts which can be used to compress test vectors or patterns generated to use on SoC testers like Advantest, Ultraflex. The concept is universal and can be extended to any SoC tester.
 
 In my professional experience, I have implemented, used and driven acceptance for a number of pattern compression techniques which are able to compress a pattern to ~50% of its original size(depending on the vector content inside the pattern).
