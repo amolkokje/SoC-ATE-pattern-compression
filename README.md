@@ -11,17 +11,18 @@ This enables the tester to use memory from the other unused channels to link to 
 Besides that, the other advantage is that when we modify the pattern to enable channel link, it reduces the pattern size too. 
 
 #### PATTERN AFTER CHANNEL LINK:
-NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-JSC           { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-NOP         { V { all_pins = 0110LHLHL1 ; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 1010LLHHL1 ; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 0101HLLHH0; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 1001HLHLH0; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 0110LHHLH1; } W { all_pins = scan_shift; } }
-NOP         { V { all_pins = 1010LHLLL1 ; } W { all_pins = scan_shift; } }
-EXITSC     { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
-EXIT         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }    <br />
+JSC         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }    <br />
+NOP         { V { all_pins = 0110LHLHL1 ; } W { all_pins = scan_shift; } }            <br />
+NOP         { V { all_pins = 1010LLHHL1 ; } W { all_pins = scan_shift; } }            <br />
+NOP         { V { all_pins = 0101HLLHH0; } W { all_pins = scan_shift; } }             <br />
+NOP         { V { all_pins = 1001HLHLH0; } W { all_pins = scan_shift; } }             <br />
+NOP         { V { all_pins = 0110LHHLH1; } W { all_pins = scan_shift; } }             <br />
+NOP         { V { all_pins = 1010LHLLL1 ; } W { all_pins = scan_shift; } }            <br />
+EXITSC      { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }    <br />
+NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }    <br />
+EXIT        { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }    <br />
+<br/>
 
 ## 2 - Replace Contiguous Vectors with Repeats
 Developed modules to modify the pattern.
@@ -29,16 +30,16 @@ IDXI(repeat) instruction can be used in the pattern to tell the processor to app
 In this method, as can be seen in the example, we replace the contiguous repeating vectors with a single vector and IDXI instruction. 
 
 #### BEFORE: 
-NOP     { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }
-NOP     { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }
-NOP     { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }
-NOP     { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }
-EXIT     { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }
+NOP     { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }  <br/>
+NOP     { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }  <br/>
+NOP     { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }  <br/>
+NOP     { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }  <br/>
+EXIT    { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }  <br/>
 
 #### AFTER:
-NOP     { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }
-IDXI 3  { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }
-EXIT     { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }
+NOP     { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }  <br/> 
+IDXI 3  { V { all_pins_norm = 11110001111; } W { all_pins_norm = scan_setup; } }  <br/>
+EXIT    { V { all_pins_norm = 10101010101; } W { all_pins_norm = scan_setup; } }  <br/>
 
 
 ## 3 - Replace idle clock cycle with loops
@@ -47,42 +48,42 @@ If this is found, we can compress the pattern by replacing many tens/hundreds of
 The STI instruction specifies N, the value specified for the operand, as the repetition count for the JNI instruction.NOTE: STI-JNI construct can be used more than once, and nested. The maximum nesting level is 8. For simple clocks, we don’t need nesting. Nested structure can be used for more complex constructs, if needed.
 
 #### BEFORE: 
-- NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-- NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
-- NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-EXIT     { V { all_pins = 10101010101; } W { all_pins = scan_setup; } }
+NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } } <br/>
+NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+EXIT    { V { all_pins = 10101010101; } W { all_pins = scan_setup; } } <br/>
 
 #### AFTER: 
-STI 4    { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-L:  #label for looping
-NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
-JNI  L    { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-EXIT     { V { all_pins = 10101010101; } W { all_pins = scan_setup; } }
+STI 4    { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+L:  #label for looping                                                  <br/>
+NOP      { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } } <br/>
+JNI  L   { V { all_pins = 11110000111; } W { all_pins = scan_setup; } } <br/>
+EXIT     { V { all_pins = 10101010101; } W { all_pins = scan_setup; } } <br/>
 
 ## 4 - Combine repeats with loops for additional compression
 We can combine both the above in a single-pass or multi-pass logic to get larger amounts of compression. This part is undergoing development and testing, so the code has not been uploaded yet. But the benefits have already been implemented and proven on a small set of vectors. 
 
 #### BEFORE:
-NOP    { V { all_pins = 1111; } W { all_pins = scan_setup; } }
-NOP    { V { all_pins = 1011; } W { all_pins = scan_setup; } }
-NOP    { V { all_pins = 1011; } W { all_pins = scan_setup; } }
-NOP    { V { all_pins = 1111; } W { all_pins = scan_setup; } }
-NOP    { V { all_pins = 1111; } W { all_pins = scan_setup; } }
-.
-. #repeats 4 more times
-.
-EXIT     { V { all_pins = 1010; } W { all_pins = scan_setup; } }
+NOP    { V { all_pins = 1111; } W { all_pins = scan_setup; } } <br/>
+NOP    { V { all_pins = 1011; } W { all_pins = scan_setup; } } <br/>
+NOP    { V { all_pins = 1011; } W { all_pins = scan_setup; } } <br/>
+NOP    { V { all_pins = 1111; } W { all_pins = scan_setup; } } <br/>
+NOP    { V { all_pins = 1111; } W { all_pins = scan_setup; } } <br/>
+.                                                              <br/>
+. #repeats 4 more times                                        <br/>
+.                                                              <br/>
+EXIT   { V { all_pins = 1010; } W { all_pins = scan_setup; } } <br/>
 
 #### AFTER:
-STI 5    { V { all_pins = 1111; } W { all_pins = scan_setup; } }
-L:  #label for looping
-IDXI 2  { V { all_pins = 1011; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 1111; } W { all_pins = scan_setup; } }
-JNI L     { V { all_pins = 1111; } W { all_pins = scan_setup; } }
-EXIT     { V { all_pins = 1010; } W { all_pins = scan_setup; } }
+STI 5    { V { all_pins = 1111; } W { all_pins = scan_setup; } } <br/>
+L:  #label for looping                                           <br/>
+IDXI 2   { V { all_pins = 1011; } W { all_pins = scan_setup; } } <br/>
+NOP      { V { all_pins = 1111; } W { all_pins = scan_setup; } } <br/>
+JNI L    { V { all_pins = 1111; } W { all_pins = scan_setup; } } <br/>
+EXIT     { V { all_pins = 1010; } W { all_pins = scan_setup; } } <br/>
