@@ -11,7 +11,7 @@ This enables the tester to use memory from the other unused channels to link to 
 Besides that, the other advantage is that when we modify the pattern to enable channel link, it reduces the pattern size too. 
 
 #### PATTERN AFTER CHANNEL LINK:
-> NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
+NOP         { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
 JSC           { V { all_pins = 1111000011100110011; } W { all_pins = scan_setup; } }
 NOP         { V { all_pins = 0110LHLHL1 ; } W { all_pins = scan_shift; } }
 NOP         { V { all_pins = 1010LLHHL1 ; } W { all_pins = scan_shift; } }
@@ -47,9 +47,9 @@ If this is found, we can compress the pattern by replacing many tens/hundreds of
 The STI instruction specifies N, the value specified for the operand, as the repetition count for the JNI instruction.NOTE: STI-JNI construct can be used more than once, and nested. The maximum nesting level is 8. For simple clocks, we don’t need nesting. Nested structure can be used for more complex constructs, if needed.
 
 #### BEFORE: 
-NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
-NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
+- NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
+- NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
+- NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
 NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
 NOP     { V { all_pins = 11110000111; } W { all_pins = scan_setup; } }
 NOP     { V { all_pins = 1011000C111; } W { all_pins = scan_setup; } }
